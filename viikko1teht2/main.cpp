@@ -4,43 +4,41 @@
 
 using namespace std;
 
-
-int game (int maxnum) {
-    srand(time(0));
-
-    int randomNumber = rand() % 20 + 1;
+int game (int maxnum)
+{
+    srand(std::time(0));
+    int randomNumber = (rand()%maxnum)+1;
     int userNumber = 0;
     int guesses = 0;
-
-    // Arvotaan satunnainen luku
-    cout << randomNumber  << endl;
-
-    // Tarkistetaan onko arvaus pienempi, suurempi tai yhtäsuuri kuin luku
-    // Kerrotaan tarkistuksen tulos tyyliin ”luku on pienempi/suurempi” tai ”oikea vastaus”
-    // Jos pelaajan vastaus ei ollut oikein, niin palataan kohtaan 2.
-
-    while (true) {
+    bool stayInLoop = true;
+    while (stayInLoop)
+    {
         cout << "Guess a number ";
         cin >> userNumber;
-
         guesses++;
-
-        if (userNumber < randomNumber) {
-            cout << "Number is bigger" << endl;
-        } else if (userNumber > randomNumber) {
-            cout << "Number is smaller" << endl;
-        } else {
+        if (userNumber == randomNumber)
+        {
             cout << "Your guess is correct!" << endl;
-            break;
+            stayInLoop = false;
+        }
+        else if (userNumber < randomNumber)
+        {
+            cout << "Number is bigger" << endl;
+        }
+        else
+        {
+            cout << "Number is smaller" << endl;
         }
     }
-
     return guesses;
 }
 
-int main() {
-    int numberOfGuesses = game(40);
-    cout << "Number of guesses: " << numberOfGuesses << endl;
-
+int main()
+{
+    cout << "Lets play!" << endl;
+    int range = 0;
+    cout << "Give max value" << endl;
+    cin >> range;
+    cout << "Your result = " << game(range) << endl;
     return 0;
 }
